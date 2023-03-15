@@ -51,4 +51,5 @@ while True:
     for e in event.get():
         if e.type == QUIT: sys.exit()
     #draw.rect(screen, (0,0,255), (399,600, 312, 600), 3) coso que no funciono 
+    
     display.flip()
