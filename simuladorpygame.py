@@ -48,8 +48,7 @@ def animr(xcoordr, ycoordr, color):
 while True:
     screen.fill((255, 255, 255))
     screen.blit(fondo, (0,0))
-    draw.rect(screen, (0,0,255), (399,600, 312, 75), 3)
     for e in event.get():
         if e.type == QUIT: sys.exit()
-    
+    #draw.rect(screen, (0,0,255), (399,600, 312, 600), 3) coso que no funciono 
     display.flip()
