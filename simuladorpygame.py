@@ -7,7 +7,7 @@ screen = display.set_mode((1280, 720))
 fondo =  transform.scale(image.load("fondo1.jpg"), (1280,720))
 
 def coord(altura, angulo):
-        alturan = 720 - altura
+        alturan = 720 - altura - 10
         theta = math.pi / 4   # Ángulo de lanzamiento (en radianes)
         v0 = 20.0   # Velocidad inicial
         g = 9.81   # Aceleración debido a la gravedad
@@ -33,7 +33,7 @@ def coord(altura, angulo):
 def listarecorrida(puntos_x):
     puntos_n = []
     for i in range (len((puntos_x))):
-          puntonuevo = puntos_x[i] + 980
+          puntonuevo = puntos_x[i] + 970
           puntos_n.append(puntonuevo)
     return puntos_n
 
@@ -58,10 +58,16 @@ while True:
     for e in event.get():
         if e.type == QUIT: sys.exit()
     draw.rect(screen, (0,0,255), (399,-120, 312, 100), 3) 
-    draw.circle(screen, (0,0,255), (980, 380), 10, 0)
-    draw.circle(screen, (0,0,255), (980, 480), 10, 0)
-    draw.circle(screen, (0,0,255), (980, 580), 10, 0)
-    x1, y1 = coord(380, 0)
+    #draw.circle(screen, (0,0,255), (980, 380), 10, 0)
+    #draw.circle(screen, (0,0,255), (980, 480), 10, 0)
+    #draw.circle(screen, (0,0,255), (980, 580), 10, 0)
+    x1, y1 = coord(380, 75)
     x11 = listarecorrida(x1)
     anim(x11, y1)
+    x2, y2 = coord(480, 60)
+    x22 = listarecorrida(x1)
+    anim(x22, y2)
+    x3, y3 = coord(580, 45)
+    x33 = listarecorrida(x1)
+    anim(x33, y3)
     display.flip()
