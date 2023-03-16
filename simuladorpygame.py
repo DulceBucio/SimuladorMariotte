@@ -4,31 +4,52 @@ import math
 
 init()
 screen = display.set_mode((1280, 720))
-fondo =  transform.scale(image.load("simulador_page-0001.jpg"), (1280,720))
+fondo =  transform.scale(image.load("fondo1.jpg"), (1280,720))
 
-def coord(ang, vinicial):
-    ang1 = math.radians(ang)
-    x1 = 0 
-    ycoord = []
-    xcoord = []
+def coord(altura, angulo):
+        alturan = 720 - altura
+        theta = math.pi / 4   # Ángulo de lanzamiento (en radianes)
+        v0 = 20.0   # Velocidad inicial
+        g = 9.81   # Aceleración debido a la gravedad
 
-    while x1 < 1000:
-        y1 = (x1*math.tan(ang1))-((9.8*x1*x1))/(2*(vinicial*vinicial)*(math.cos(ang1)*math.cos(ang1)))
-        x1 = x1 + 50
-        ycoord.append(y1)
-        xcoord.append(x1)
+        # Calcular el tiempo en que se alcanza la altura máxima
+        t_max = v0 * math.sin(theta) / g
 
-    return xcoord, ycoord
+        # Calcular el desplazamiento horizontal total
+        d_total = v0 * math.cos(theta) * t_max * 2
+
+        # Calcular los puntos a partir de la mitad del tiro parabólico
+        puntos_x = []
+        puntos_y = []
+        for x in range(int(d_total/2), int(d_total)+1):
+            t = (x / (v0 * math.cos(theta)))
+            y = alturan + (v0 * math.sin(theta) * t) - (0.5 * g * t**2)
+            puntos_x.append(x)
+            puntos_y.append(y)
+
+        return(puntos_x, puntos_y)
 
 
-def animr(xcoordr, ycoordr, color):
+def listarecorrida(puntos_x):
+    puntos_n = []
+    for i in range (len((puntos_x))):
+          puntonuevo = puntos_x[i] + 980
+          puntos_n.append(puntonuevo)
+    return puntos_n
+
+def anim(xcoord, ycoord):
     puntos = 0
-    while puntos < len(xcoordr):
-        draw.rect(screen, (0, 255, 0), (xcoordr[puntos], 300-ycoordr[puntos], 10, 10), 3)
+    color = (0, 0, 255)
+    while puntos < len(xcoord):
+        draw.circle(screen, (0,0,255), (xcoord[puntos], 720 - ycoord[puntos]), 10, 0)
         time.delay(300)
         display.update()
         puntos += 1
         
+def calculos(altura):
+    velocidadsalida = math.sqrt(2*9.81*altura)
+    return velocidadsalida
+
 
 
 while True:
@@ -37,5 +58,10 @@ while True:
     for e in event.get():
         if e.type == QUIT: sys.exit()
     draw.rect(screen, (0,0,255), (399,-120, 312, 100), 3) 
-    draw.circle(screen, (0,0,255), (399, 400), 10, 1)
+    draw.circle(screen, (0,0,255), (980, 380), 10, 0)
+    draw.circle(screen, (0,0,255), (980, 480), 10, 0)
+    draw.circle(screen, (0,0,255), (980, 580), 10, 0)
+    x1, y1 = coord(380, 0)
+    x11 = listarecorrida(x1)
+    anim(x11, y1)
     display.flip()
