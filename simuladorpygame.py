@@ -53,16 +53,24 @@ def calculos(altura):
 velocidad1 = calculos(.34)
 velocidad2 = calculos(.24)
 velocidad3 = calculos(.14)
+font = font.SysFont("Arial", 20)
+img1 = font.render(str(velocidad1), True, (0,0,0))
+img2 = font.render(str(velocidad2), True, (0,0,0))
+img3 = font.render(str(velocidad3), True, (0,0,0))
+
 
 while True:
     screen.fill((255, 255, 255))
     screen.blit(fondo, (0,0))
     for e in event.get():
         if e.type == QUIT: sys.exit()
-    draw.rect(screen, (0,0,255), (670, 300, 310, 480), 0)
+    draw.rect(screen, (0,0,255), (670, 300, 310, 375), 0)
     #draw.circle(screen, (0,0,255), (980, 380), 10, 0)
     #draw.circle(screen, (0,0,255), (980, 480), 10, 0)
     #draw.circle(screen, (0,0,255), (980, 580), 10, 0)
+    screen.blit(img1, (400, 460))
+    screen.blit(img2, (400, 510))
+    screen.blit(img3, (400, 570))
     x1, y1 = coord(380, 75)
     x11 = listarecorrida(x1)
     anim(x11, y1)
