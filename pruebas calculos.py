@@ -22,4 +22,9 @@ for x in range(int(d_total/2), int(d_total)+1):
     puntos_x.append(x)
     puntos_y.append(y)
 
-print(puntos_x + 980)
+# Graficar los puntos
+plt.plot(puntos_x, puntos_y)
+plt.xlabel('Desplazamiento horizontal')
+plt.ylabel('Altura')
+plt.title('Tiro parabólico')
+plt.show()

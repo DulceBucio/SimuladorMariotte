@@ -7,7 +7,7 @@ screen = display.set_mode((1280, 720))
 fondo =  transform.scale(image.load("fondo1.jpg"), (1280,720))
 
 def coord(altura, angulo):
-        alturan = 720 - altura - 10
+        alturan = 720 - altura - 10 
         theta = math.pi / 4   # Ángulo de lanzamiento (en radianes)
         v0 = 20.0   # Velocidad inicial
         g = 9.81   # Aceleración debido a la gravedad
@@ -42,7 +42,7 @@ def anim(xcoord, ycoord):
     color = (0, 0, 255)
     while puntos < len(xcoord):
         draw.circle(screen, (0,0,255), (xcoord[puntos], 720 - ycoord[puntos]), 10, 0)
-        time.delay(300)
+        time.delay(200)
         display.update()
         puntos += 1
         
@@ -50,14 +50,16 @@ def calculos(altura):
     velocidadsalida = math.sqrt(2*9.81*altura)
     return velocidadsalida
 
-
+velocidad1 = calculos(.34)
+velocidad2 = calculos(.24)
+velocidad3 = calculos(.14)
 
 while True:
     screen.fill((255, 255, 255))
     screen.blit(fondo, (0,0))
     for e in event.get():
         if e.type == QUIT: sys.exit()
-    draw.rect(screen, (0,0,255), (399,-120, 312, 100), 3) 
+    draw.rect(screen, (0,0,255), (670, 300, 310, 480), 0)
     #draw.circle(screen, (0,0,255), (980, 380), 10, 0)
     #draw.circle(screen, (0,0,255), (980, 480), 10, 0)
     #draw.circle(screen, (0,0,255), (980, 580), 10, 0)
